@@ -1,6 +1,3 @@
-using Printf
-
-
 function DFT(array)
 
 end
@@ -27,13 +24,34 @@ function convolve(arr1, arr2)
         
         conv_matrix[CartesianIndex.(i, i:length(mulitplied_row)+i-1)] .= mulitplied_row
     end
-    convolution = sum(conv_matrix, dims=1)
-    return convolution  # Find sum of columns
+    convolution = sum(conv_matrix, dims=1)  # Find sum of columns
+    return convolution
 end
 
 
 function matrixMultiply(matrix1, matrix2)
-
+    matrix1Size = size(matrix1)
+    matrix2Size = size(matrix2)
+    resultMatrix = zeros(matrix1Size[1], matrix2Size[2])
+    for row in 1:matrix1Size[1]
+        for column in 1:matrix2Size[2]
+            row1 = matrix1[row, :]
+            column2 = matrix2[:, column]
+            resultMatrix[row, column] = sum(dotProduct(row1, column2))
+        end
+    end
+    return resultMatrix
 end
 
-convolve([1,5,0,3],[5,-3,-2,5])
+
+function dotProduct(array1, array2)
+    return array1 .* array2
+end
+
+
+println(convolve([1,5,0,3],[5,-3,-2,5]))
+
+
+m1 = [1 2 3; 4 5 6]
+m2 = [7 8; 9 10; 11 12]
+println(matrixMultiply(m1, m2))
