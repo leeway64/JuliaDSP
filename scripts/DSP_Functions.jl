@@ -1,13 +1,6 @@
-function DFT(array)
-
-end
-
-
-function IDFT(array)
-    
-end
-
-
+""" Returns the convolution of 2 arrays, arr1 and arr2
+Pre: arr1 and arr2 must not be empty.
+"""
 function convolve(arr1, arr2)
     if length(arr1) > length(arr2)
         larger_arr = arr1
@@ -29,9 +22,19 @@ function convolve(arr1, arr2)
 end
 
 
+""" Returns the product of 2 matrices.
+Pre: The number of columns in matrix1 must equal the number of rows in matrix2.
+Post: The resulting matrix will have the same number of rows as matrix1 and the same number of
+columns as matrix2.
+"""
 function matrixMultiply(matrix1, matrix2)
     matrix1Size = size(matrix1)
     matrix2Size = size(matrix2)
+
+    if matrix1Size[2] != matrix2Size[1]
+        throw(DimensionMismatch("The number of columns in matrix1 must equal the number of rows in matrix2"))
+    end
+
     resultMatrix = zeros(matrix1Size[1], matrix2Size[2])
     for row in 1:matrix1Size[1]
         for column in 1:matrix2Size[2]
@@ -44,14 +47,26 @@ function matrixMultiply(matrix1, matrix2)
 end
 
 
+#  Returns the dot product of array1 and array2
 function dotProduct(array1, array2)
     return array1 .* array2
 end
 
 
-println(convolve([1,5,0,3],[5,-3,-2,5]))
+""""""
+function DFT(array)
+
+end
 
 
+""""""
+function IDFT(array)
+    
+end
+
+
+# println("fsdfdsf")
+# println(convolve([1],[1]))
 m1 = [1 2 3; 4 5 6]
 m2 = [7 8; 9 10; 11 12]
-println(matrixMultiply(m1, m2))
+matrixMultiply(m1, m2)
