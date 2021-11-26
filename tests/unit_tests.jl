@@ -1,4 +1,5 @@
 using Test
+include("../scripts/JuliaDSP.jl")
 using .JuliaDSP
 
 
@@ -7,12 +8,18 @@ using .JuliaDSP
     a2 = [5, -3, -2, 5]
 
     @testset "Arrays of length 1" begin
-        @test convolve([1.0], [1.0]) == [1.0]
+        @test JuliaDSP.convolve([1], [1]) == reshape([1], 1, 1)
+        @test JuliaDSP.convolve([100], [13]) == reshape([1300], 1, 1)
+        @test JuliaDSP.convolve([90], [100]) == reshape([9000], 1, 1)
     end
     
     @testset "Commutative property" begin
-        @test convolve(a1, a2) == [5 22 -17 10 16 -6 15]
-        @test convolve(a2, a1) == [5 22 -17 10 16 -6 15]        
+        @test JuliaDSP.convolve(a1, a2) == [5 22 -17 10 16 -6 15]
+        @test JuliaDSP.convolve(a2, a1) == [5 22 -17 10 16 -6 15]        
+    end
+
+    @testset "Arrays are different sizes" begin
+        @test JuliaDSP.convolve() == []
     end
 end
 
@@ -20,10 +27,27 @@ end
 @testset "Matrix multiplication" begin
     m1 = [1 2 3; 4 5 6]
     m2 = [7 8; 9 10; 11 12]
-    
+    m3 = [11 12; 4 5]
+    m4 = [12 13; 1000 1000]
+
     @testset "0 case" begin
-        @test matrixMultiply([], []) == []
+        @test JuliaDSP.matrixMultiply([], []) == reshape([], 0, 0)
+        @test JuliaDSP.matrixMultiply([88], []) == reshape([], 0, 0)
+        @test JuliaDSP.matrixMultiply([], [4]) == reshape([], 0, 0)
     end
-    
-    @test matrixMultiply(m1, m2) == [58 64; 139 154]
+
+    @testset "1 case" begin
+        @test JuliaDSP.matrixMultiply([1], [3]) == reshape([3], 1, 1)
+        @test JuliaDSP.matrixMultiply([45], [3]) == reshape([135], 1, 1)
+        @test JuliaDSP.matrixMultiply([100], [100]) == reshape([10000], 1, 1)
+
+    end
+
+    @testset "Matrices are both square and the same size" begin
+        @test JuliaDSP.matrixMultiply(m3, m4) == [12132 12143; 5048 5052]
+    end
+
+    @testset "Matrices are different sizes" begin
+        @test JuliaDSP.matrixMultiply(m1, m2) == [58 64; 139 154]
+    end
 end
