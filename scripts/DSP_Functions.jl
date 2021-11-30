@@ -14,6 +14,7 @@ function convolve(arr1, arr2)
     conv_matrix = zeros(length(larger_arr), number_of_columns)
     for i in 1:length(larger_arr)
         mulitplied_row = smaller_arr * larger_arr[i]
+        # Insert the multiplied row into the convolution matrix
         conv_matrix[CartesianIndex.(i, i:length(mulitplied_row)+i-1)] .= mulitplied_row
     end
 
@@ -23,13 +24,12 @@ end
 
 
 """ Returns the product of 2 matrices.
-Pre: The number of columns in matrix1 must equal the number of rows in matrix2.
-matrix1 and matrix2 must not be empty.
+Pre: The number of columns in matrix1 must equal the number of rows in matrix2 (throws
+DimensionMismatch if not).
 Post: The resulting matrix will have the same number of rows as matrix1 and the same number of
 columns as matrix2.
 """
 function matrixMultiply(matrix1, matrix2)
-
     # Handle the case when 1 matrix is empty and the other has a length of 1, or when both matrices
     # are emtpy.
     if length(matrix1) == 0 && length(matrix2) == 1 ||
