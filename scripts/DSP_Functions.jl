@@ -12,7 +12,7 @@ function convolve(arr1, arr2)
 
     number_of_columns = length(arr1) + length(arr2) - 1
     conv_matrix = zeros(length(larger_arr), number_of_columns)
-    for i in 1:length(smaller_arr)
+    for i in 1:length(larger_arr)
         mulitplied_row = smaller_arr * larger_arr[i]
         conv_matrix[CartesianIndex.(i, i:length(mulitplied_row)+i-1)] .= mulitplied_row
     end
@@ -29,6 +29,9 @@ Post: The resulting matrix will have the same number of rows as matrix1 and the 
 columns as matrix2.
 """
 function matrixMultiply(matrix1, matrix2)
+
+    # Handle the case when 1 matrix is empty and the other has a length of 1, or when both matrices
+    # are emtpy.
     if length(matrix1) == 0 && length(matrix2) == 1 ||
             length(matrix1) == 1 && length(matrix2) == 0 ||
             length(matrix1) == 0 && length(matrix2) == 0

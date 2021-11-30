@@ -1,4 +1,5 @@
 using Test
+
 include("../scripts/JuliaDSP.jl")
 using .JuliaDSP
 
@@ -6,6 +7,7 @@ using .JuliaDSP
 @testset "Convolution" begin
     a1 = [1, 5, 0, 3]
     a2 = [5, -3, -2, 5]
+    a3 = [100, 200]
 
     @testset "Arrays of length 1" begin
         @test JuliaDSP.convolve([1], [1]) == reshape([1], 1, 1)
@@ -19,7 +21,9 @@ using .JuliaDSP
     end
 
     @testset "Arrays are different sizes" begin
-        @test JuliaDSP.convolve() == []
+        @test JuliaDSP.convolve([1, 8, 6], [78]) == [78 624 468]
+        @test JuliaDSP.convolve([1, 2], [1, 2, 3]) == [1 4 7 6]
+        @test JuliaDSP.convolve(a1, a3) == [100  700 1000 300 600]
     end
 end
 
