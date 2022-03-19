@@ -5,3 +5,7 @@ transform, the inverse Fourier transform, and convolution.
 
 Refer to the [usage examples](docs/usage_examples.md) for more information on how to use the
 functions.
+
+## Third Party Software
+
+- None. JuliaDSP uses only the base Julia features.
