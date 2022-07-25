@@ -1,10 +1,10 @@
 # Usage Examples
 
-To use JuliaDSP, make sure to include the following lines at the top of the file:
+To use LWJuliaDSP, make sure to first include the LWJuliaDSP module:
 
 ```julia
-include("../scripts/JuliaDSP.jl")
-using .JuliaDSP
+include("../scripts/LWJuliaDSP.jl")
+using .LWJuliaDSP
 ```
 
 ## Convolution
@@ -12,7 +12,7 @@ using .JuliaDSP
 ```julia
 a1 = [1, 5, 0, 3]
 a2 = [5, -3, -2, 5]
-println(JuliaDSP.convolve(a1, a2))
+println(LWJuliaDSP.convolve(a1, a2))
 ```
 
 Which prints out:
@@ -26,7 +26,7 @@ Which prints out:
 ```julia
 m1 = [1 2 3; 4 5 6]
 m2 = [7 8; 9 10; 11 12]
-println(JuliaDSP.matrixMultiply(m1, m2))
+println(LWJuliaDSP.matrixMultiply(m1, m2))
 ```
 
 Which results in:

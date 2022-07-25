@@ -1,4 +1,4 @@
 # A module that provides convolution, matrix multiplication, DFT, and IDFT functions
-module JuliaDSP
+module LWJuliaDSP
 include("DSP_Functions.jl")
 end

@@ -1,7 +1,7 @@
 using Test
 
-include("../scripts/JuliaDSP.jl")
-using .JuliaDSP
+include("../scripts/LWJuliaDSP.jl")
+using .LWJuliaDSP
 
 
 @testset "Convolution" begin
